@@ -1,12 +1,16 @@
 <?php
 session_start();
-header('X-XSS-Protection: 0');
 ?>
 <html>
 <head>
   <title></title>
 </head>
 <body>
-  <p>Your request for <?php echo $_POST['email']; ?> has been sent.</p>
+  <p>Send your email address for system access.</p>
+  <form action="request_step_2.php" method="POST">
+    <label for="email">E-Mail:</label>
+    <input id="email" name="email" type="text">
+    <input type="submit" value="Send">
+  </form>
 </body>
 </html>
