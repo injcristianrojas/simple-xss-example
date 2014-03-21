@@ -1,5 +1,11 @@
 <?php
 session_start();
+$names = Array('Cristián', 'Alejandro', 'María', 'Denisse', 'Carlos', 'Carmen', 'Emmanuel', 'Winston');
+$surnames = Array('Ibañez', 'Perez', 'Goldstein', 'Smith', 'Gonzalez');
+if (!isset($_SESSION['full_name'])) {
+  $_SESSION['full_name'] = $names[array_rand($names)] . ' ' . $surnames[array_rand($surnames)];
+}
+
 header('X-XSS-Protection: 0');
 
 // Sqlite check
@@ -15,7 +21,7 @@ $db = null;
 ?>
 <html>
 <head>
-  <title>Welcome to our secure system</title>
+  <title>Secure system</title>
   <style type="text/css">
     .praetorian {
       font-family: sans-serif;
@@ -26,6 +32,7 @@ $db = null;
   </style>
 </head>
 <body>
+  <p>Welcome to our secure system, <?php echo $_SESSION['full_name'] ?></p>
   <form action="index.php" method="POST">
     <label for="greeting">Say Hello:</label>
     <input id="greeting" name="greeting" type="text">
