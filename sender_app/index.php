@@ -23,16 +23,6 @@ $db = null;
 <head>
   <title>Secure system</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <style type="text/css">
-    .praetorian a {
-      font-family: sans-serif;
-      position: absolute;
-      bottom: 1%;
-      right: 1%;
-      color: black;
-      text-decoration: none;
-    }
-  </style>
 </head>
 <body>
   <p>Welcome to our secure system, <?php echo $_SESSION['full_name'] ?></p>
@@ -48,6 +38,6 @@ foreach ($result as $row) {
 }
 ?>
   </p>
-  <p class="praetorian"><a href="flush.php">&#960</a></p>
+  <p><a style="font-family: sans-serif; position: absolute; bottom: 1%; right: 1%; color: black; text-decoration: none;" href="flush.php">&#960</a></p>
 </body>
 </html>
