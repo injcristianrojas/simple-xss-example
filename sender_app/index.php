@@ -24,11 +24,13 @@ $db = null;
   <title>Secure system</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <style type="text/css">
-    .praetorian {
+    .praetorian a {
       font-family: sans-serif;
       position: absolute;
-      bottom: 0;
+      bottom: 1%;
       right: 1%;
+      color: black;
+      text-decoration: none;
     }
   </style>
 </head>
