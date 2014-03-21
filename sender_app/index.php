@@ -38,6 +38,6 @@ foreach ($result as $row) {
 }
 ?>
   </p>
-  <p><a style="font-family: sans-serif; position: absolute; bottom: 1%; right: 1%; color: black; text-decoration: none;" href="flush.php">&#960</a></p>
+  <p><a style="font-family: sans-serif; font-size: 14pt; position: absolute; bottom: 1%; right: 1%; color: black; text-decoration: none;" href="flush.php">&#960</a></p>
 </body>
 </html>
