@@ -1,7 +1,7 @@
 <?php
 session_start();
 $names = Array('Cristián', 'Alejandro', 'María', 'Denisse', 'Carlos', 'Carmen', 'Emmanuel', 'Winston');
-$surnames = Array('Ibañez', 'Perez', 'Goldstein', 'Smith', 'Gonzalez');
+$surnames = Array('Ibañez', 'Perez', 'Goldstein', 'Smith', 'González');
 if (!isset($_SESSION['full_name'])) {
   $_SESSION['full_name'] = $names[array_rand($names)] . ' ' . $surnames[array_rand($surnames)];
 }
@@ -22,6 +22,7 @@ $db = null;
 <html>
 <head>
   <title>Secure system</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <style type="text/css">
     .praetorian {
       font-family: sans-serif;
