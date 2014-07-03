@@ -16,7 +16,7 @@ a session-grabbing app made in Python.
 Start the session-grabbing server:
 
 ```Shell
-python receiver_server/server.py
+php -S localhost:8181
 ```
 
 Then start the target server:
