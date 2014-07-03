@@ -22,7 +22,7 @@ php -S localhost:8181
 Then start the target server:
 
 ```Shell
-cd sender_app
+cd app
 php -S localhost:8282
 ```
 
