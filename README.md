@@ -4,11 +4,10 @@
 
 As part of my Software Security classes, I've decided to make this app which
 simulates a persistent XSS attack, using a target server made using PHP and
-a session-grabbing app made in Python.
+a session-grabbing app made in PHP.
 
 ## Requirements
 
-* Python 2.7 or better
 * PHP-CLI (Command Line Interface) 5.4.0 or better
 
 ## Usage
