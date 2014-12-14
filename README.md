@@ -11,6 +11,12 @@ a session-grabbing app made in PHP.
 ### Requirements
 
 * PHP-CLI (Command Line Interface) 5.4.0 or better
+* PHP PDO package (for sqlite3 support)
+
+To fulfill these, do the following:
+
+* For RPM-based systems (Fedora, RHEL, CentOS): `sudo yum install php-cli php-pdo`
+* For DEB-based systems (Ubuntu, Debian): `sudo apt-get update && sudo apt-get install php5-cli php5-sqlite`
 
 ### Usage
 
@@ -37,23 +43,17 @@ Go to the app at <http://localhost:8282> and have fun!
 
 ### Usage
 
-First, start by building a server image:
+Start the session-grabbing server. If this is your first time doing it, wait a
+while. Docker must grab the php:5.6-apache image first:
 
 ```Shell
-docker build -t xss-server-img .
-```
-
-Being done with the image, you can now start the containers needed. First, the
-session-grabbing server:
-
-```Shell
-docker run -it --rm --name xss_grabbing_server -p 8181:80 xss-server-img
+docker run -it --rm --name xss_grabbing_server -p 8181:80 php:5.6-apache
 ```
 
 Next, the target server:
 
 ```Shell
-docker run -it --rm --name xss_target_server -p 8282:80 xss-server-img
+docker run -it --rm --name xss_target_server -p 8282:80 -v "$(pwd)"/app:/var/www/html php:5.6-apache
 ```
 
 Now, pay attention at the server logs on the grabbing server, go to
