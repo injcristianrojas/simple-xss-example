@@ -6,11 +6,13 @@ As part of my Software Security classes, I've decided to make this app which
 simulates a persistent XSS attack, using a target server made using PHP and
 a session-grabbing app made in PHP.
 
-## Requirements
+## Working the normal way
+
+### Requirements
 
 * PHP-CLI (Command Line Interface) 5.4.0 or better
 
-## Usage
+### Usage
 
 Start the session-grabbing server:
 
@@ -26,6 +28,36 @@ php -S localhost:8282
 ```
 
 Go to the app at <http://localhost:8282> and have fun!
+
+## Working the Docker way (Beta)
+
+### Requirements
+
+* Docker 1.3.2 or later
+
+### Usage
+
+First, start by building a server image:
+
+```Shell
+docker build -t xss-server-img .
+```
+
+Being done with the image, you can now start the containers needed. First, the
+session-grabbing server:
+
+```Shell
+docker run -it --rm --name xss_grabbing_server -p 8181:80 xss-server-img
+```
+
+Next, the target server:
+
+```Shell
+docker run -it --rm --name xss_target_server -p 8282:80 xss-server-img
+```
+
+Now, pay attention at the server logs on the grabbing server, go to
+<http://localhost:8282> and have fun!
 
 LICENSE AND AUTHOR
 ==================
