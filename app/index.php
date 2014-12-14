@@ -10,7 +10,8 @@ header('X-XSS-Protection: 0');
 
 // Sqlite check
 
-$db = new PDO('sqlite:greetings.db');
+$db = new PDO('sqlite:/tmp/greetings.db');
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $db->exec("CREATE TABLE IF NOT EXISTS greetings (message varchar(10))");
 if (isset($_POST['greeting'])) {
   $db->exec("INSERT INTO greetings VALUES ('" . $_POST['greeting'] . "')");
