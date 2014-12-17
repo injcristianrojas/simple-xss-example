@@ -3,8 +3,8 @@
 ## Introduction
 
 As part of my Software Security classes, I've decided to make this app which
-simulates a persistent XSS attack, using a target server made using PHP and
-a session-grabbing app made in PHP.
+simulates a persistent XSS attack, using a target application made using PHP and
+a session-grabbing server.
 
 ## Working the normal way
 
@@ -26,7 +26,7 @@ Start the session-grabbing server:
 php -S localhost:8181
 ```
 
-Then start the target server:
+Then start the target app:
 
 ```Shell
 cd app
@@ -50,7 +50,7 @@ while. Docker must grab the php:5.6-apache image first:
 docker run -it --rm --name xss_grabbing_server -p 8181:80 php:5.6-apache
 ```
 
-Next, the target server:
+Next, the target app:
 
 ```Shell
 docker run -it --rm --name xss_target_server -p 8282:80 -v "$(pwd)"/app:/var/www/html php:5.6-apache
