@@ -41,10 +41,19 @@ Go to the app at <http://localhost:8282> and have fun!
 
 * Docker 1.3.2 or later
 
+### Pre-setup
+
+Usually I teach my classes in a very low bandwidth environment, so I prefer
+to ask my students to prep the machines prior to class. If this is your case,
+download the php:5.6-apache image like this:
+
+```Shell
+docker pull php:5.6-apache
+```
+
 ### Usage
 
-Start the session-grabbing server. If this is your first time doing it, wait a
-while. Docker must grab the php:5.6-apache image first:
+Start the session-grabbing server:
 
 ```Shell
 docker run -it --rm --name xss_grabbing_server -p 8181:80 php:5.6-apache
@@ -53,7 +62,7 @@ docker run -it --rm --name xss_grabbing_server -p 8181:80 php:5.6-apache
 Next, the target app:
 
 ```Shell
-docker run -it --rm --name xss_target_server -p 8282:80 -v "$(pwd)"/app:/var/www/html php:5.6-apache
+docker run -it --rm --privileged --name xss_target_server -p 8282:80 -v "$(pwd)"/app:/var/www/html php:5.6-apache
 ```
 
 Now, pay attention at the server logs on the grabbing server, go to
