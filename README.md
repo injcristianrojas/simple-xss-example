@@ -48,7 +48,7 @@ to ask my students to prep the machines prior to class. If this is your case,
 download the php:5.6-apache image like this:
 
 ```Shell
-docker pull php:5.6-apache
+docker pull injcristianrojas/simple-xss-example
 ```
 
 ### Usage
@@ -56,13 +56,13 @@ docker pull php:5.6-apache
 Start the session-grabbing server:
 
 ```Shell
-docker run -it --rm --name xss_grabbing_server -p 8181:80 php:5.6-apache
+docker run -it --rm --name xss_grabbing_server -p 8181:80 injcristianrojas/simple-xss-example
 ```
 
 Next, the target app:
 
 ```Shell
-docker run -it --rm --privileged --name xss_target_server -p 8282:80 -v "$(pwd)"/app:/var/www/html php:5.6-apache
+docker run -it --rm --name xss_target_server -p 8282:80  injcristianrojas/simple-xss-example
 ```
 
 Now, pay attention at the server logs on the grabbing server, go to
