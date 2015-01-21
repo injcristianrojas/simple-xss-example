@@ -31,8 +31,16 @@ docker run -it --rm --name xss_grabbing_server -p 8181:80 injcristianrojas/simpl
 Next, the target app:
 
 ```Shell
-docker run -it --rm --name xss_target_server -p 8282:80  injcristianrojas/simple-xss-example
+docker run -it --rm --name xss_victim_server -p 8282:80  injcristianrojas/simple-xss-example
 ```
 
 Now, pay attention at the server logs on the grabbing server, go to
 <http://localhost:8282> and have fun!
+
+## Getting inside
+
+To get inside either machine, issue:
+
+```Shell
+docker exec -it <machine_name> /bin/bash
+```

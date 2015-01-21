@@ -1,2 +1,3 @@
-FROM php:5.6-apache
-COPY app/ /var/www/html/
+FROM usertaken/nginx-php
+RUN apt-get update && apt-get install php5-sqlite -y --no-install-recommends && rm -rf /var/lib/apt/lists/*
+COPY app/ /var/www/
