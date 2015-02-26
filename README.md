@@ -25,13 +25,13 @@ docker pull injcristianrojas/simple-xss-example
 Start the session-grabbing server:
 
 ```Shell
-docker run -it --rm --name xss_grabbing_server -p 8181:80 injcristianrojas/simple-xss-example
+docker run -it --rm --name grabber -p 8181:80 injcristianrojas/simple-xss-example
 ```
 
-Next, the target app:
+Next, the victim application:
 
 ```Shell
-docker run -it --rm --name xss_victim_server -p 8282:80 injcristianrojas/simple-xss-example
+docker run -it --rm --name victim --privileged=true -p 8282:80 -v ${PWD}/app:/var/www/ injcristianrojas/simple-xss-example
 ```
 
 Now, pay attention at the server logs on the grabbing server, go to
