@@ -14,7 +14,7 @@ a session-grabbing server.
 
 Usually I teach my classes in a very low bandwidth environment, so I prefer
 to ask my students to prep the machines prior to class. If this is your case,
-download the php:5.6-apache image like this:
+download the image like this:
 
 ```Shell
 docker pull injcristianrojas/simple-xss-example
@@ -25,13 +25,13 @@ docker pull injcristianrojas/simple-xss-example
 Start the session-grabbing server:
 
 ```Shell
-docker run -it --rm --name grabber -p 8181:80 injcristianrojas/simple-xss-example
+docker run -it --rm --name grabber_server -p 8181:80 injcristianrojas/simple-xss-example
 ```
 
 Next, the victim application:
 
 ```Shell
-docker run -it --rm --name victim --privileged=true -p 8282:80 -v ${PWD}/app:/var/www/ injcristianrojas/simple-xss-example
+docker run -it --rm --name victim_server --privileged=true -p 8282:80 -v ${PWD}/app:/var/www/ injcristianrojas/simple-xss-example
 ```
 
 Now, pay attention at the server logs on the grabbing server, go to
