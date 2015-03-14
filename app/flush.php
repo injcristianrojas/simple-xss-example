@@ -2,8 +2,8 @@
 
 $db = new PDO('sqlite:/tmp/greetings.db');
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$db->exec("CREATE TABLE IF NOT EXISTS greetings (message varchar(10))");
-$db->exec("DELETE FROM greetings");
+$db->exec("DROP TABLE greetings");
+$db->exec("CREATE TABLE greetings (author VARCHAR(100), message TEXT)");
 
 session_start();
 unset($_SESSION['full_name']);

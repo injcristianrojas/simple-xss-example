@@ -1,30 +1,80 @@
 <?php
 session_start();
-$names = Array('Cristián', 'Alejandro', 'María', 'Denisse', 'Carlos', 'Carmen', 'Emmanuel', 'Winston');
-$surnames = Array('Ibañez', 'Perez', 'Goldstein', 'Smith', 'González');
+$names = Array(
+        'Cristián',
+        'Alejandro',
+        'María',
+        'Denisse',
+        'Carlos',
+        'Carmen',
+        'Emmanuel',
+        'Winston'
+);
+$surnames = Array(
+            'Ibañez',
+            'Perez',
+            'Goldstein',
+            'Smith',
+            'González'
+);
 if (!isset($_SESSION['full_name'])) {
-  $_SESSION['full_name'] = $names[array_rand($names)] . ' ' . $surnames[array_rand($surnames)];
+  $_SESSION['full_name'] =
+    $names[array_rand($names)] .
+    ' ' .
+    $surnames[array_rand($surnames)];
 }
+$full_name = $_SESSION['full_name'];
 
 header('X-XSS-Protection: 0');
 
-// Sqlite check
-
 $db = new PDO('sqlite:/tmp/greetings.db');
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$db->exec("CREATE TABLE IF NOT EXISTS greetings (message varchar(10))");
+$db->exec("CREATE TABLE IF NOT EXISTS greetings
+  (author VARCHAR(100), message TEXT)");
 if (isset($_POST['greeting'])) {
-  $db->exec("INSERT INTO greetings VALUES ('" . $_POST['greeting'] . "')");
+  $greeting = $_POST['greeting'];
+  $db->exec(
+    "INSERT INTO greetings VALUES ('$full_name', '$greeting')"
+  );
 }
-$result = $db->query("SELECT message FROM greetings");
-$db = null;
-
+$result = $db->query("SELECT author, message FROM greetings")->fetchAll();
 ?>
+
 <html>
 <head>
   <title>Secure system</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <style type="text/css">
+    .Table {
+        display: table;
+    }
+    .Heading {
+        display: table-row;
+        font-weight: bold;
+        text-align: center;
+    }
+    .Row {
+        display: table-row;
+    }
+    .Cell {
+        display: table-cell;
+        border: solid;
+        border-width: thin;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .Praetorian {
+      font-family: sans-serif;
+      font-size: 14pt;
+      position: fixed;
+      bottom: 1%;
+      right: 1%;
+      color: black;
+      text-decoration: none;
+    }
+  </style>
 </head>
+
 <body>
   <p>Welcome to our secure system, <?php echo $_SESSION['full_name'] ?></p>
   <form action="index.php" method="POST">
@@ -32,13 +82,26 @@ $db = null;
     <input id="greeting" name="greeting" type="text">
     <input type="submit" value="Send">
   </form>
-  <p>
-<?php
-foreach ($result as $row) {
-  echo $row['message'] . "<br/>";
-}
-?>
-  </p>
-  <p><a style="font-family: sans-serif; font-size: 14pt; position: fixed; bottom: 1%; right: 1%; color: black; text-decoration: none;" href="flush.php">&#960</a></p>
+
+  <?php if (count($result) > 0) { ?>
+  <div class="Table">
+    <div class="Heading">
+      <div class="Cell">Author</div>
+      <div class="Cell">Message</div>
+    </div>
+    <?php foreach ($result as $row) { ?>
+    <div class="Row">
+      <div class="Cell"><?php echo $row['author'] ?></div>
+      <div class="Cell"><?php echo $row['message'] ?></div>
+    </div>
+    <?php } ?>
+  </div>
+  <?php
+  }
+  $db = null;
+  ?>
+
+  <p><a href="index.php">Home</a></p>
+  <p><a class="Praetorian" href="flush.php">&#960</a></p>
 </body>
 </html>
