@@ -22,6 +22,8 @@ docker pull injcristianrojas/simple-xss-example
 
 ## Usage
 
+Start the listener server first:
+
 ```Shell
 docker run -it --rm --name grabber_server -p 8181:80 injcristianrojas/simple-xss-example
 ```
