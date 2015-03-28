@@ -33,9 +33,8 @@ $db->exec("CREATE TABLE IF NOT EXISTS greetings
   (author VARCHAR(100), message TEXT)");
 if (isset($_POST['greeting'])) {
   $greeting = $_POST['greeting'];
-  $db->exec(
-    "INSERT INTO greetings VALUES ('$full_name', '$greeting')"
-  );
+  $pstmt = $db->prepare("INSERT INTO greetings VALUES (:full_name, :greeting)");
+  $pstmt->execute(array(':full_name' => $full_name, ':greeting' => $greeting));
 }
 $result = $db->query("SELECT author, message FROM greetings")->fetchAll();
 ?>
