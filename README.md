@@ -9,6 +9,7 @@ a session-grabbing server.
 ## Requirements
 
 * Docker 1.3.2 or later
+* Docker Compose
 
 ## Pre-setup
 
@@ -17,21 +18,15 @@ to ask my students to prep the machines prior to class. If this is your case,
 download the image like this:
 
 ```Shell
-docker pull injcristianrojas/simple-xss-example
+docker-compose build
 ```
 
 ## Usage
 
-Start the listener server first:
+Start the servers:
 
 ```Shell
-docker run -it --rm --name grabber_server -p 8181:80 injcristianrojas/simple-xss-example
-```
-
-Next, the victim application:
-
-```Shell
-docker run -it --rm --name victim_server --privileged=true -p 8282:80 -v ${PWD}/app:/var/www/ injcristianrojas/simple-xss-example
+docker-compose up
 ```
 
 Now, pay attention at the server logs on the grabbing server, go to
