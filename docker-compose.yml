@@ -1,0 +1,15 @@
+phpfpm:
+  build: php
+  privileged: true
+  volumes:
+    - ./app:/var/www
+
+nginx:
+  build: nginx
+  privileged: true
+  volumes:
+    - ./app:/var/www
+  ports:
+    - "80:80"
+  links:
+    - phpfpm
