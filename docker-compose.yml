@@ -4,12 +4,19 @@ phpfpm:
   volumes:
     - ./app:/var/www
 
-nginx:
+grabber:
+  build: nginx
+  ports:
+    - "8181:80"
+  links:
+    - phpfpm
+
+victim:
   build: nginx
   privileged: true
   volumes:
     - ./app:/var/www
   ports:
-    - "80:80"
+    - "8282:80"
   links:
     - phpfpm
